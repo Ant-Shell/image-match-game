@@ -29,7 +29,7 @@ const images = ref([
 </script>
 
 <template>
-  <html>
+  <html class="h-screen">
     <body>
       <CardsContainer v-bind:images="images"/>
     </body>
