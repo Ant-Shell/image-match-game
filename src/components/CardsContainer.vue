@@ -9,7 +9,7 @@ defineProps({
 
 
 <template>
-  <section>
+  <section class="grid grid-cols-4 place-items-center h-screen">
     <div v-for="image in images">
       <Card v-bind:image="image"/>
     </div>
