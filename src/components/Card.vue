@@ -6,7 +6,7 @@ defineProps({
 </script>
 
 <template>
-  <section>
+  <section class="w-fit h-fit">
     {{ image?.imageURL }}
   </section> 
 </template>
