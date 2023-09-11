@@ -1,7 +1,37 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+import CardsContainer from './components/CardsContainer.vue'
+import { ref } from 'vue'
+
+let id = 0
+const images = ref([
+  {id: id++, imageURL: `Image ${id}`},
+  {id: id++, imageURL: `Image ${id}`},
+  {id: id++, imageURL: `Image ${id}`},
+  {id: id++, imageURL: `Image ${id}`},
+  {id: id++, imageURL: `Image ${id}`},
+  {id: id++, imageURL: `Image ${id}`},
+  {id: id++, imageURL: `Image ${id}`},
+  {id: id++, imageURL: `Image ${id}`},
+  {id: id++, imageURL: `Image ${id}`},
+  {id: id++, imageURL: `Image ${id}`},
+  {id: id++, imageURL: `Image ${id}`},
+  {id: id++, imageURL: `Image ${id}`},
+  {id: id++, imageURL: `Image ${id}`},
+  {id: id++, imageURL: `Image ${id}`},
+  {id: id++, imageURL: `Image ${id}`},
+  {id: id++, imageURL: `Image ${id}`},
+  ])
+
+  defineProps({
+    images: Array<{id: number, imageURL: string}>
+  })
+
 </script>
 
 <template>
-  <HelloWorld msg="Vite + Vue" />
+  <html class="h-screen">
+    <body>
+      <CardsContainer v-bind:images="images"/>
+    </body>
+  </html>
 </template>
