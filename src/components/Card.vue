@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 
 defineProps({
-  image: Object
+  image: Object,
+  shuffledImage: Object
 })
 </script>
 
