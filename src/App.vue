@@ -14,14 +14,16 @@ const urls = ['Image_1', 'Image_2','Image_3','Image_4','Image_5','Image_6','Imag
     return imageBuilder
   }
 
-  const imageRandomizer = imageList(urls).map((image:object, index:number) => {
-    // Need to shuffle the indices of the result of imageList(urls)
-  })
+  const imageShuffler = (imageList: Array<Object>): Array<Object> => {
+    return imageList.sort(() => Math.random() - 0.5)
+  } // Need to call this whenever a new game is started and on app load
 
-  const images = ref(imageList(urls)) // Put imageRandomizer here
+  const images = ref(imageList(urls)) // List of images
+  const shuffledImages = ref(imageShuffler(imageList(urls))) // Shuffled images
 
   defineProps({
-    images: Array<{id: number, imageURL: string}>
+    images: Array<{id: number, imageURL: string}>,
+    shuffledImages: Array<{id: number, imageURL: string}>
   })
 
 </script>
