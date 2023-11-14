@@ -1,13 +1,14 @@
 <script lang="ts" setup>
 
 defineProps({
-  image: Object
+  // image: Object,
+  shuffledImage: Object
 })
 </script>
 
 <template>
   <section class="w-fit h-fit">
-    {{ image?.imageURL }}
+    {{ shuffledImage?.imageURL }}
   </section> 
 </template>
 
