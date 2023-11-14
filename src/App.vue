@@ -2,7 +2,7 @@
 import CardsContainer from './components/CardsContainer.vue'
 import { ref } from 'vue'
 
-
+// Test "images"
 const urls = ['Image_1', 'Image_2','Image_3','Image_4','Image_5','Image_6','Image_7','Image_8']
 
   const imageList = (urlList: Array<string>): Array<Object> => {
@@ -16,13 +16,13 @@ const urls = ['Image_1', 'Image_2','Image_3','Image_4','Image_5','Image_6','Imag
 
   const imageShuffler = (imageList: Array<Object>): Array<Object> => {
     return imageList.sort(() => Math.random() - 0.5)
-  } // Need to call this whenever a new game is started and on app load
+  }
 
-  const images = ref(imageList(urls)) // List of images
-  const shuffledImages = ref(imageShuffler(imageList(urls))) // Shuffled images
+  // const images = ref(imageList(urls))
+  const shuffledImages = ref(imageShuffler(imageList(urls)))
 
   defineProps({
-    images: Array<{id: number, imageURL: string}>,
+    // images: Array<{id: number, imageURL: string}>,
     shuffledImages: Array<{id: number, imageURL: string}>
   })
 
@@ -31,7 +31,7 @@ const urls = ['Image_1', 'Image_2','Image_3','Image_4','Image_5','Image_6','Imag
 <template>
   <html class="h-screen">
     <body>
-      <CardsContainer v-bind:images="images"/>
+      <CardsContainer v-bind:shuffledImages="shuffledImages"/>
     </body>
   </html>
 </template>

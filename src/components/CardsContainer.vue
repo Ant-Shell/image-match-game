@@ -2,7 +2,7 @@
 import Card from './Card.vue'
 
 defineProps({
-  images: Array<{id: number, imageURL: string}>,
+  // images: Array<{id: number, imageURL: string}>,
   shuffledImages: Array<{id: number, imageURL: string}>
 })
 
@@ -11,8 +11,8 @@ defineProps({
 
 <template>
   <section class="grid grid-cols-4 place-items-center h-screen">
-    <div v-for="image in images">
-      <Card v-bind:image="image"/>
+    <div v-for="shuffledImage in shuffledImages">
+      <Card v-bind:shuffledImage="shuffledImage"/>
     </div>
   </section>
 </template>
