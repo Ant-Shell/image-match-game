@@ -9,9 +9,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "pexels": "^1.4.0",
     "vue": "^3.3.4"
   },
   "devDependencies": {
+    "@types/node": "^20.10.5",
     "@vitejs/plugin-vue": "^4.2.3",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.27",

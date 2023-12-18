@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import CardsContainer from './components/CardsContainer.vue'
 import { ref } from 'vue'
+import { createClient } from 'pexels';
+
+const API_KEY = import.meta.env.VITE_APP_API_KEY
+const client = createClient(API_KEY)
 
 // Test "images"
 const urls = ['Image_1', 'Image_2','Image_3','Image_4','Image_5','Image_6','Image_7','Image_8']
