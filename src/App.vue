@@ -1,10 +1,21 @@
 <script setup lang="ts">
 import CardsContainer from './components/CardsContainer.vue'
 import { ref } from 'vue'
-import { createClient } from 'pexels';
+import { createClient, Photos, ErrorResponse } from 'pexels';
 
 const API_KEY = import.meta.env.VITE_APP_API_KEY
 const client = createClient(API_KEY)
+
+// Get images using The Pexels Javascript library
+let images = client.photos.curated({ per_page: 8 }).then(photos => {
+  if ((<Photos>photos).photos) {
+    const imageList = (<Photos>photos)
+    return imageList.photos
+  } else {
+    const error = (<ErrorResponse>photos)
+      return error.error
+  }
+})
 
 // Test "images"
 const urls = ['Image_1', 'Image_2','Image_3','Image_4','Image_5','Image_6','Image_7','Image_8']
@@ -36,6 +47,7 @@ const urls = ['Image_1', 'Image_2','Image_3','Image_4','Image_5','Image_6','Imag
   <html class="h-screen">
     <body>
       <CardsContainer v-bind:shuffledImages="shuffledImages"/>
+      {{ console.log(images) }}
     </body>
   </html>
 </template>
