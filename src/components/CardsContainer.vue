@@ -2,8 +2,7 @@
 import Card from './Card.vue'
 
 defineProps({
-  // images: Array<{id: number, imageURL: string}>,
-  shuffledImages: Array<{id: number, imageURL: string}>
+  shuffledImages: Array<{id: number, url: string}>
 })
 
 </script>
