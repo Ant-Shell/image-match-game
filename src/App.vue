@@ -219,7 +219,7 @@ const images = [
   const shuffledImages = ref(imageShuffler(imageList(images)))
 
   defineProps({
-    shuffledImages: Array<{id: number, url: string}>
+    shuffledImages: Array<{id: number, src: { medium: string }}>
   })
 
 </script>
