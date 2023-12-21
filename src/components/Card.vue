@@ -7,7 +7,8 @@ defineProps({
 
 <template>
   <section class="w-fit h-fit">
-    {{ shuffledImage?.url }}
+    <div>
+      <img :src="shuffledImage?.src.medium">
+    </div>
   </section> 
 </template>
-
