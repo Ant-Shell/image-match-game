@@ -6,7 +6,8 @@ import { ref } from 'vue'
 // const API_KEY = import.meta.env.VITE_APP_API_KEY
 // const client = createClient(API_KEY)
 
-// const images = ref<Array<Photo> | string>()
+// May need to adjust downstream, or isolate the string somehow:
+// const images = ref<Array<Photo> | string>() 
 
 // Get images using The Pexels Javascript library
 // const getImages = async () => {
