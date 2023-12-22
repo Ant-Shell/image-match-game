@@ -6,9 +6,9 @@ defineProps({
 </script>
 
 <template>
-  <section class="w-fit h-fit">
+  <section>
     <div>
-      <img :src="shuffledImage?.src.medium">
+      <img class="object-contain" :src="shuffledImage?.src.medium">
     </div>
   </section> 
 </template>
