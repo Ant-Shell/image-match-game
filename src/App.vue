@@ -227,7 +227,7 @@ const images = [
 
 <template>
   <html>
-    <body>
+    <body className="bg-[#1f2e27]">
         <CardsContainer v-bind:shuffledImages="shuffledImages"/>
     </body>
   </html>
