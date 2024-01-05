@@ -9,7 +9,7 @@ defineProps({
 
 
 <template>
-  <section className="grid gap-4 grid-cols-4 p-8">
+  <section className="grid gap-4 grid-cols-4 p-8 h-screen w-screen">
     <div v-for="shuffledImage in shuffledImages" className="w-full h-full">
       <Card v-bind:shuffledImage="shuffledImage"/>
     </div>
