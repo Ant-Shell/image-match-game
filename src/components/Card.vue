@@ -6,7 +6,7 @@ defineProps({
 </script>
 
 <template>
-  <section className="border-red-100 border-2 h-full w-full">
-      <img className="h-full w-full" :src="shuffledImage?.src.medium">
+  <section className="border-black border-2 h-full w-full rounded-lg">
+      <img className="h-full w-full rounded-lg" :src="shuffledImage?.src.medium">
   </section> 
 </template>
