@@ -226,7 +226,7 @@ const images = [
 
 
 <template>
-  <section className="bg-[#1f2e27] h-screen md:h-[120vh] lg:h-[170vh] xl:h-[260vh]"> 
+  <section className="bg-[#1f2e27]">
       <CardsContainer v-bind:shuffledImages="shuffledImages"/>
   </section>   
 </template>
