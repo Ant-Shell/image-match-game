@@ -218,8 +218,12 @@ const images = [
 
   const shuffledImages = ref(imageShuffler(imageList(images)))
 
+  const clickedCards = ref([])
+
+
   defineProps({
-    shuffledImages: Array<{id: number, src: { medium: string }}>
+    shuffledImages: Array<{id: number, src: { medium: string }}>,
+    clickedCards: Array<string>
   })
 
 </script>
@@ -227,6 +231,6 @@ const images = [
 
 <template>
   <section className="bg-[#1f2e27]">
-      <CardsContainer v-bind:shuffledImages="shuffledImages"/>
+      <CardsContainer v-bind:shuffledImages="shuffledImages" v-bind:clickedCards="clickedCards" />
   </section>   
 </template>
