@@ -6,7 +6,7 @@ const props = defineProps({
 })
 
 const addCard = (event:Event):void => {
-    if (props.clickedCards !== undefined && props.clickedCards?.length < 2) {
+    if (props.clickedCards !== undefined && props.clickedCards.length < 2) {
       props.clickedCards.push((event.target as HTMLImageElement).src)
     }
     checkForMatch()
