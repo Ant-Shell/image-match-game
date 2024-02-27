@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import cardBlue from '../assets/Card_Background_Blue.png'
 
 const props = defineProps({
   shuffledImage: Object,
@@ -32,6 +33,7 @@ const checkForMatch = () => {
 <template>
   <section className="border-black border-2 h-full w-full rounded-lg hover:border-sky-700
   hover:mt-[-5px] hover:shadow-md hover:shadow-cyan-500/50 cursor-pointer" @click="addCard">
-      <img className="h-full w-full rounded-lg" :src="shuffledImage?.src.medium">
+      <!-- <img className="h-full w-full rounded-lg" :src="shuffledImage?.src.medium"> -->
+      <img className="h-full w-full rounded-lg" :src="cardBlue">
   </section> 
 </template>
