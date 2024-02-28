@@ -31,13 +31,24 @@ import images from './data/imageData'
     isClicked?: boolean
   }
 
+  const clickedCards = ref([])
+
+  const matchedCards = ref([])
+
   const imageList = (urlList: Array<Image>): Array<Image> => {
-    const imageDuplicator = urlList?.reduce((acc:Array<Image>, curr:Image): Array<Image> => {
+    return urlList?.reduce((acc:Array<Image>, curr:Image): Array<Image> => {
       curr.isClicked = false
       acc.push(curr) && acc.push(curr)
       return acc
     }, [])
-    return imageDuplicator
+    .map((image:Image, index:number) => {
+      const { src, isClicked } = image
+      return {
+        id: index,
+        src: src,
+        isClicked: isClicked
+      }
+    })
   }
 
   const imageShuffler = (imageList: Array<Image>): Array<Image> => {
@@ -45,11 +56,6 @@ import images from './data/imageData'
   }
 
   const shuffledImages = ref(imageShuffler(imageList(images)))
-
-  const clickedCards = ref([])
-
-  const matchedCards = ref([])
-
 
   defineProps({
     shuffledImages: Array<Image>,
