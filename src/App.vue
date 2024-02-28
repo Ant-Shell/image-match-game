@@ -25,15 +25,22 @@ import images from './data/imageData'
 // }
 // getImages()
 
-  const imageList = (urlList: Array<Object>): Array<Object> => {
-    const imageDuplicator = urlList?.reduce((acc:Array<Object>, curr:Object): Array<Object> => {
+  type Image  = {
+    id: number,
+    src: { medium: string },
+    isClicked?: boolean
+  }
+
+  const imageList = (urlList: Array<Image>): Array<Image> => {
+    const imageDuplicator = urlList?.reduce((acc:Array<Image>, curr:Image): Array<Image> => {
+      curr.isClicked = false
       acc.push(curr) && acc.push(curr)
       return acc
     }, [])
     return imageDuplicator
   }
 
-  const imageShuffler = (imageList: Array<Object>): Array<Object> => {
+  const imageShuffler = (imageList: Array<Image>): Array<Image> => {
     return imageList.sort(() => Math.random() - 0.5)
   }
 
@@ -41,16 +48,20 @@ import images from './data/imageData'
 
   const clickedCards = ref([])
 
+  const matchedCards = ref([])
+
 
   defineProps({
-    shuffledImages: Array<{id: number, src: { medium: string }}>,
-    clickedCards: Array<string>
+    shuffledImages: Array<Image>,
+    clickedCards: Array<string>,
+    matchedCards: Array<string>
   })
 </script>
 
 
 <template>
   <section className="bg-[#1f2e27]">
-      <CardsContainer v-bind:shuffledImages="shuffledImages" v-bind:clickedCards="clickedCards" />
+      <CardsContainer v-bind:shuffledImages="shuffledImages" v-bind:clickedCards="clickedCards"
+      v-bind:matchedCards="matchedCards" />
   </section>   
 </template>
