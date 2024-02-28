@@ -3,7 +3,7 @@ import cardBlue from '../assets/Card_Background_Blue.png'
 
 const props = defineProps({
   shuffledImage: Object,
-  clickedCards: Array<string>
+  clickedCards: Array<string>,
 })
 
 const addCard = (event:Event):void => {
@@ -28,6 +28,11 @@ const checkForMatch = () => {
     // If cards do not match, flip cards face down again
   }
 }
+
+// const test = () => {
+//   console.log(props.shuffledImage?.isClicked)
+// }
+
 </script>
 
 <template>
