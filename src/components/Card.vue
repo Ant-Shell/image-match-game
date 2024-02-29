@@ -3,7 +3,7 @@ import cardBlue from '../assets/Card_Background_Blue.png'
 
 const props = defineProps({
   shuffledImage: Object,
-  clickedCards: Array<string>,
+  clickedCards: Array<Object>,
 })
 
   const flipCard = (event:Event) => {
@@ -14,16 +14,22 @@ const props = defineProps({
     if ((event.target as HTMLImageElement).alt === props.shuffledImage.id.toString()) {
       props.shuffledImage.isClicked = true
     }
-    addCard()
+    addCard((event.target as HTMLImageElement).alt)
   }
 
-  const addCard = () => {
+  const addCard = (id:string) => {
     if (props.shuffledImage === undefined) {
       return
     }
 
     if (props.clickedCards !== undefined && props.clickedCards.length < 2) {
-      props.clickedCards.push(props.shuffledImage.src.medium)
+      const imageDetails = {
+        id: id,
+        src: { medium: props.shuffledImage.src.medium },
+        isClicked: true
+      }
+
+      props.clickedCards.push(imageDetails)
     }
     console.log(props.clickedCards)
     checkForMatch()
