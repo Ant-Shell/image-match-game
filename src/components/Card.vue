@@ -1,9 +1,16 @@
 <script lang="ts" setup>
 import cardBlue from '../assets/Card_Background_Blue.png'
 
+interface Photo {
+    id: number,
+    src: { medium: string },
+    isClicked?: boolean
+  }
+
 const props = defineProps({
   shuffledImage: Object,
-  clickedCards: Array<Object>,
+  clickedCards: Array<Photo>,
+  matchedCards: Array<Photo>
 })
 
   const flipCard = (event:Event) => {
@@ -14,42 +21,38 @@ const props = defineProps({
     if ((event.target as HTMLImageElement).alt === props.shuffledImage.id.toString()) {
       props.shuffledImage.isClicked = true
     }
-    addCard((event.target as HTMLImageElement).alt)
+    addCard()
   }
 
-  const addCard = (id:string) => {
+  const addCard = () => {
+    const photo = props.shuffledImage as Photo
+
     if (props.shuffledImage === undefined) {
       return
     }
 
     if (props.clickedCards !== undefined && props.clickedCards.length < 2) {
-      const imageDetails = {
-        id: id,
-        src: { medium: props.shuffledImage.src.medium },
-        isClicked: true
-      }
-
-      props.clickedCards.push(imageDetails)
+      props.clickedCards?.push(photo)
     }
-    console.log(props.clickedCards)
     checkForMatch()
-}
-
-const checkForMatch = () => {
-  if (props.clickedCards === undefined) {
-    return
   }
 
-  if (props.clickedCards[0] === props.clickedCards[1]) { // Cards match, reset clickedCards array
-    props.clickedCards.length = 0
-    console.log("Hello")
-    // If cards match, leave cards face up
-  } else if (props.clickedCards.length === 2) { // Cards don't match, reset clickedCards array
-    props.clickedCards.length = 0
-    console.log("Hi")
-    // If cards do not match, flip cards face down again
+  const checkForMatch = () => {
+    if (props.clickedCards === undefined) {
+      return
+    }
+
+    if (props.clickedCards?.length === 2)
+      if (props.clickedCards[0].src.medium === props.clickedCards[1].src.medium) {
+        console.log("It's a match!")
+        props.clickedCards.length = 0
+      } else {
+        console.log("Not a match")
+        props.clickedCards.length = 0
+      }
+      console.log(props.clickedCards)
   }
-}
+
 </script>
 
 <template>
