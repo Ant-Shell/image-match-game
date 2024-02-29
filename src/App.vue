@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import CardsContainer from './components/CardsContainer.vue'
 import { ref } from 'vue'
-import images from './data/imageData'
+import photos from './data/imageData'
 // import { createClient, ErrorResponse, Photos, Photo } from 'pexels';
 
 // const API_KEY = import.meta.env.VITE_APP_API_KEY
@@ -25,7 +25,7 @@ import images from './data/imageData'
 // }
 // getImages()
 
-  type Image  = {
+  interface Photo {
     id: number,
     src: { medium: string },
     isClicked?: boolean
@@ -35,13 +35,13 @@ import images from './data/imageData'
 
   const matchedCards = ref([])
 
-  const imageList = (urlList: Array<Image>): Array<Image> => {
-    return urlList?.reduce((acc:Array<Image>, curr:Image): Array<Image> => {
+  const imageList = (urlList: Array<Photo>): Array<Photo> => {
+    return urlList?.reduce((acc:Array<Photo>, curr:Photo): Array<Photo> => {
       curr.isClicked = false
       acc.push(curr) && acc.push(curr)
       return acc
     }, [])
-    .map((image:Image, index:number) => {
+    .map((image:Photo, index:number) => {
       const { src, isClicked } = image
       return {
         id: index,
@@ -51,16 +51,16 @@ import images from './data/imageData'
     })
   }
 
-  const imageShuffler = (imageList: Array<Image>): Array<Image> => {
+  const imageShuffler = (imageList: Array<Photo>): Array<Photo> => {
     return imageList.sort(() => Math.random() - 0.5)
   }
 
-  const shuffledImages = ref(imageShuffler(imageList(images)))
+  const shuffledImages = ref(imageShuffler(imageList(photos)))
 
   defineProps({
-    shuffledImages: Array<Image>,
-    clickedCards: Array<Image>,
-    matchedCards: Array<string> // Might not need this
+    shuffledImages: Array<Photo>,
+    clickedCards: Array<Photo>,
+    matchedCards: Array<Photo> // Might not need this
   })
 </script>
 
