@@ -28,7 +28,8 @@ import photos from './data/imageData'
   interface Photo {
     id: number,
     src: { medium: string },
-    isClicked?: boolean
+    isClicked?: boolean,
+    isMatched?: boolean
   }
 
   const clickedCards = ref([])
@@ -37,16 +38,16 @@ import photos from './data/imageData'
 
   const imageList = (urlList: Array<Photo>): Array<Photo> => {
     return urlList?.reduce((acc:Array<Photo>, curr:Photo): Array<Photo> => {
-      curr.isClicked = false
       acc.push(curr) && acc.push(curr)
       return acc
     }, [])
     .map((image:Photo, index:number) => {
-      const { src, isClicked } = image
+      const { src } = image
       return {
         id: index,
         src: src,
-        isClicked: isClicked
+        isClicked: false,
+        isMatched: false,
       }
     })
   }
@@ -55,10 +56,10 @@ import photos from './data/imageData'
     return imageList.sort(() => Math.random() - 0.5)
   }
 
-  const shuffledImages = ref(imageShuffler(imageList(photos)))
+  const shuffledPhotos = ref(imageShuffler(imageList(photos)))
 
   defineProps({
-    shuffledImages: Array<Photo>,
+    shuffledPhotos: Array<Photo>,
     clickedCards: Array<Photo>,
     matchedCards: Array<Photo> // Might not need this
   })
@@ -67,7 +68,7 @@ import photos from './data/imageData'
 
 <template>
   <section className="bg-[#1f2e27]">
-      <CardsContainer v-bind:shuffledImages="shuffledImages" v-bind:clickedCards="clickedCards"
+      <CardsContainer v-bind:shuffledPhotos="shuffledPhotos" v-bind:clickedCards="clickedCards"
       v-bind:matchedCards="matchedCards" />
   </section>   
 </template>
