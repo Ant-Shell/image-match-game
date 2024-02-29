@@ -52,17 +52,27 @@ const props = defineProps({
       } else {
         console.log("Not a match")
         // Flip cards back over - face down
-        console.log(props.clickedCards[0].id)
-        console.log(props.clickedCards[1].id)
+        cardResetter(props.clickedCards[0].id, props.clickedCards[1].id)
         props.clickedCards.length = 0
       }
-      console.log(props.clickedCards)
+      // console.log(props.clickedCards)
       // console.log(props.matchedCards)
   }
 
-  // const cardResetter = () => {
+  const cardResetter = (cardId1: number, cardId2: number) => {
+    if (props.shuffledPhotos === undefined) {
+      return
+    }
 
-  // }
+    props.shuffledPhotos.forEach((photo) => {
+      if (photo.id === cardId1) {
+        setTimeout(() => {photo.isClicked = false}, 1600)
+      }
+      if (photo.id === cardId2) {
+        setTimeout(() => {photo.isClicked = false}, 1800)
+      }
+    })
+  }
 
   // const cardMatcher = () => {
 
