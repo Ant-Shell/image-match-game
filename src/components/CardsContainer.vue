@@ -1,16 +1,16 @@
 <script lang="ts" setup>
 import Card from './Card.vue'
 
-  type Image  = {
+  interface Photo {
     id: number,
     src: { medium: string },
     isClicked?: boolean
   }
 
   defineProps({
-    shuffledImages: Array<Image>,
-    clickedCards: Array<Image>,
-    matchedCards: Array<string> // Might not need this
+    shuffledImages: Array<Photo>,
+    clickedCards: Array<Photo>,
+    matchedCards: Array<Photo> // Might not need this
   })
 </script>
 
