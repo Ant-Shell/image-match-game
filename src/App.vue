@@ -59,8 +59,8 @@ import images from './data/imageData'
 
   defineProps({
     shuffledImages: Array<Image>,
-    clickedCards: Array<string>,
-    matchedCards: Array<string>
+    clickedCards: Array<Image>,
+    matchedCards: Array<string> // Might not need this
   })
 </script>
 
