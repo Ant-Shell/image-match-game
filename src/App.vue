@@ -25,41 +25,41 @@ import photos from './data/imageData'
 // }
 // getImages()
 
-  interface Photo {
-    id: number,
-    src: { medium: string },
-    isClicked?: boolean,
-    isMatched?: boolean
-  }
+interface Photo {
+  id: number,
+  src: { medium: string },
+  isClicked?: boolean,
+  isMatched?: boolean
+}
 
-  const clickedCards = ref([])
+const clickedCards = ref([])
 
-  const imageList = (urlList: Array<Photo>): Array<Photo> => {
-    return urlList?.reduce((acc:Array<Photo>, curr:Photo): Array<Photo> => {
-      acc.push(curr) && acc.push(curr)
-      return acc
-    }, [])
-    .map((image:Photo, index:number) => {
-      const { src } = image
-      return {
-        id: index,
-        src: src,
-        isClicked: false,
-        isMatched: false,
-      }
-    })
-  }
-
-  const imageShuffler = (imageList: Array<Photo>): Array<Photo> => {
-    return imageList.sort(() => Math.random() - 0.5)
-  }
-
-  const shuffledPhotos = ref(imageShuffler(imageList(photos)))
-
-  defineProps({
-    shuffledPhotos: Array<Photo>,
-    clickedCards: Array<Photo>,
+const imageList = (urlList: Array<Photo>): Array<Photo> => {
+  return urlList?.reduce((acc:Array<Photo>, curr:Photo): Array<Photo> => {
+    acc.push(curr) && acc.push(curr)
+    return acc
+  }, [])
+  .map((image:Photo, index:number) => {
+    const { src } = image
+    return {
+      id: index,
+      src: src,
+      isClicked: false,
+      isMatched: false,
+    }
   })
+}
+
+const imageShuffler = (imageList: Array<Photo>): Array<Photo> => {
+  return imageList.sort(() => Math.random() - 0.5)
+}
+
+const shuffledPhotos = ref(imageShuffler(imageList(photos)))
+
+defineProps({
+  shuffledPhotos: Array<Photo>,
+  clickedCards: Array<Photo>,
+})
 </script>
 
 
