@@ -1,5 +1,5 @@
-// Test "images"
-const images = [
+// Test "photos"
+const photos = [
   {
     "id": 19562401,
     "width": 3874,
@@ -178,4 +178,4 @@ const images = [
   }
 ]
 
-export default images;
+export default photos;
