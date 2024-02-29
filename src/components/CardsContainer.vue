@@ -8,7 +8,7 @@ import Card from './Card.vue'
   }
 
   defineProps({
-    shuffledImages: Array<Photo>,
+    shuffledPhotos: Array<Photo>,
     clickedCards: Array<Photo>,
     matchedCards: Array<Photo> // Might not need this
   })
@@ -16,8 +16,9 @@ import Card from './Card.vue'
 
 <template>
   <section className="grid gap-4 grid-cols-4 p-8 h-[120vh] sm:h-[130vh] md:h-[170vh] lg:h-[250vh] xl:h-[290vh] 2xl:h-[400vh] w-screen">
-    <div v-for="shuffledImage in shuffledImages" v-bind:key="shuffledImage.id" className="w-full h-full">
-      <Card v-bind:shuffledImage="shuffledImage" v-bind:clickedCards="clickedCards" v-bind:matchedCards="matchedCards" />
+    <div v-for="shuffledPhoto in shuffledPhotos" v-bind:key="shuffledPhoto.id" className="w-full h-full">
+      <Card v-bind:shuffledPhoto="shuffledPhoto" v-bind:clickedCards="clickedCards"
+       v-bind:matchedCards="matchedCards" v-bind:shuffledPhotos="shuffledPhotos"/>
     </div>
   </section>
 </template>
