@@ -34,8 +34,6 @@ import photos from './data/imageData'
 
   const clickedCards = ref([])
 
-  const matchedCards = ref([])
-
   const imageList = (urlList: Array<Photo>): Array<Photo> => {
     return urlList?.reduce((acc:Array<Photo>, curr:Photo): Array<Photo> => {
       acc.push(curr) && acc.push(curr)
@@ -61,14 +59,12 @@ import photos from './data/imageData'
   defineProps({
     shuffledPhotos: Array<Photo>,
     clickedCards: Array<Photo>,
-    matchedCards: Array<Photo> // Might not need this
   })
 </script>
 
 
 <template>
   <section className="bg-[#1f2e27]">
-      <CardsContainer v-bind:shuffledPhotos="shuffledPhotos" v-bind:clickedCards="clickedCards"
-      v-bind:matchedCards="matchedCards" />
+      <CardsContainer v-bind:shuffledPhotos="shuffledPhotos" v-bind:clickedCards="clickedCards" />
   </section>   
 </template>
