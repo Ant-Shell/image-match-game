@@ -28,13 +28,14 @@ const flipCard = (event:Event) => {
 const addCard = () => {
   const photo = props.shuffledPhoto as Photo
 
-  if (props.shuffledPhoto === undefined) {
+  if (props.clickedCards === undefined || props.shuffledPhoto === undefined) {
     return
   }
 
-  if (props.clickedCards !== undefined && props.clickedCards.length < 2) {
-    props.clickedCards?.push(photo)
+  if (props.clickedCards.length < 2 && !props.clickedCards.includes(photo)) {
+    props.clickedCards.push(photo)
   }
+  console.log(props.clickedCards)
   checkForMatch()
 }
 
