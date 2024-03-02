@@ -35,7 +35,6 @@ const addCard = () => {
   if (props.clickedCards.length < 2 && !props.clickedCards.includes(photo)) {
     props.clickedCards.push(photo)
   }
-  console.log(props.clickedCards)
   checkForMatch()
 }
 
@@ -44,7 +43,7 @@ const checkForMatch = () => {
     return
   }
 
-  if (props.clickedCards?.length === 2)
+  if (props.clickedCards.length === 2)
     if (props.clickedCards[0].src.medium === props.clickedCards[1].src.medium) {
       // Cards stay face up
       cardMatcher(props.clickedCards[0].id, props.clickedCards[1].id)
