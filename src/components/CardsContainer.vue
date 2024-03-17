@@ -6,6 +6,7 @@ interface Photo {
   src: { medium: string },
   isClicked?: boolean,
   isMatched?: boolean,
+  isLocked?: boolean,
 }
 
 defineProps({
