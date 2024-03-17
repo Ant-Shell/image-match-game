@@ -29,7 +29,8 @@ interface Photo {
   id: number,
   src: { medium: string },
   isClicked?: boolean,
-  isMatched?: boolean
+  isMatched?: boolean,
+  isLocked?: boolean,
 }
 
 const clickedCards = ref([])
@@ -46,6 +47,7 @@ const imageList = (urlList: Array<Photo>): Array<Photo> => {
       src: src,
       isClicked: false,
       isMatched: false,
+      isLocked: false,
     }
   })
 }
