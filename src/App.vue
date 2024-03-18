@@ -58,6 +58,10 @@ const imageShuffler = (imageList: Array<Photo>): Array<Photo> => {
 
 const shuffledPhotos = ref(imageShuffler(imageList(photos)))
 
+const gameResetter = () => {
+  shuffledPhotos.value = imageShuffler(imageList(photos))
+}
+
 defineProps({
   shuffledPhotos: Array<Photo>,
   clickedCards: Array<Photo>,
@@ -66,7 +70,8 @@ defineProps({
 
 
 <template>
-  <section className="bg-[#1f2e27]">
+  <section className="bg-[#1f2e27] flex flex-col items-center">
+      <button className="w-32 border-2 bg-[#3a3d2c] border-[#3a3d2c] text-white hover:bg-[#78807c] rounded-full" @click="gameResetter">Reset Game</button>
       <CardsContainer v-bind:shuffledPhotos="shuffledPhotos" v-bind:clickedCards="clickedCards" />
   </section>   
 </template>
