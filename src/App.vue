@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Heading from './components/Heading.vue'
 import CardsContainer from './components/CardsContainer.vue'
 import { ref } from 'vue'
 import photos from './data/imageData'
@@ -70,8 +71,8 @@ defineProps({
 
 
 <template>
-  <section className="bg-[#1f2e27] flex flex-col items-center">
-      <button className="w-32 border-2 bg-[#3a3d2c] border-[#3a3d2c] text-white hover:bg-[#78807c] rounded-full" @click="gameResetter">Reset Game</button>
+  <section className="bg-[#1f2e27] h-screen w-full">
+      <Heading :gameResetter="gameResetter" />
       <CardsContainer v-bind:shuffledPhotos="shuffledPhotos" v-bind:clickedCards="clickedCards" />
   </section>   
 </template>
