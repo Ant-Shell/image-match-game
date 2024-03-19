@@ -8,7 +8,7 @@ const props = defineProps({
 <template>
   <header className="flex justify-evenly items-center w-screen h-[10%]">
     <button className="w-28 border-2 bg-[#3a3d2c] border-[#3a3d2c] text-white
-    hover:bg-[#78807c] rounded-full" @click="props.gameResetter">
+    hover:bg-[#78807c] rounded-md" @click="props.gameResetter">
       Reset Game
     </button>
     <div>
