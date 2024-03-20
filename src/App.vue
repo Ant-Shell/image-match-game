@@ -71,8 +71,8 @@ defineProps({
 
 
 <template>
-  <section className="h-screen w-full overflow-hidden">
+  <main class="h-screen w-full overflow-hidden">
       <Heading :gameResetter="gameResetter" />
       <CardsContainer v-bind:shuffledPhotos="shuffledPhotos" v-bind:clickedCards="clickedCards" />
-  </section>   
+  </main>
 </template>
