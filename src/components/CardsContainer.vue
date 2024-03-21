@@ -16,7 +16,7 @@ defineProps({
 </script>
 
 <template>
-  <section class="grid gap-1 grid-cols-4 p-4 w-screen h-[90%] overflow-y-auto">
+  <section class="grid gap-1 grid-cols-4 p-4 h-[90%] overflow-y-auto">
     <div v-for="shuffledPhoto in shuffledPhotos" v-bind:key="shuffledPhoto.id" class="w-full h-full">
       <Card v-bind:shuffledPhoto="shuffledPhoto" v-bind:clickedCards="clickedCards" v-bind:shuffledPhotos="shuffledPhotos"/>
     </div>
