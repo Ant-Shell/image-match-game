@@ -100,12 +100,12 @@ const cardMatcher = (cardId1: number, cardId2: number) => {
 </script>
 
 <template>
-  <button className="border-black border-2 h-full w-full rounded-lg" :disabled="props.shuffledPhoto?.isLocked" @click="flipCard">
-    <img v-if="props.shuffledPhoto?.isClicked" className="h-full w-full rounded-lg cursor-default"
+  <button class="border-black border-2 h-full w-full rounded-lg" :disabled="props.shuffledPhoto?.isLocked" @click="flipCard">
+    <img v-if="props.shuffledPhoto?.isClicked" class="h-full w-full rounded-lg cursor-default"
     :src="shuffledPhoto?.src.medium" :alt="props.shuffledPhoto?.id">
-    <img v-else-if="props.shuffledPhoto?.isMatched" className="h-full w-full rounded-lg cursor-default"
+    <img v-else-if="props.shuffledPhoto?.isMatched" class="h-full w-full rounded-lg cursor-default"
     :src="shuffledPhoto?.src.medium" :alt="props.shuffledPhoto?.id">
-    <img v-else className="h-full w-full rounded-lg hover:mt-[-5px] hover:shadow-md
+    <img v-else class="h-full w-full rounded-lg hover:mt-[-5px] hover:shadow-md
      hover:border-sky-700 hover:shadow-cyan-500/50 cursor-pointer" :src="cardBlue" :alt="props.shuffledPhoto?.id">
   </button>
 </template>
