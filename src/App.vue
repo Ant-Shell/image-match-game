@@ -71,7 +71,7 @@ defineProps({
 
 
 <template>
-  <main class="h-screen w-full overflow-hidden">
+  <main class="h-screen w-full flex flex-col md:flex-row">
       <Heading :gameResetter="gameResetter" />
       <CardsContainer v-bind:shuffledPhotos="shuffledPhotos" v-bind:clickedCards="clickedCards" />
   </main>
