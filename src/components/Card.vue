@@ -58,7 +58,7 @@ const checkForMatch = () => {
     return
   }
 
-  if (props.clickedCards.length >= 2)
+  if (props.clickedCards.length >= 2) {
     if (props.clickedCards[0].src.medium === props.clickedCards[1].src.medium) {
       // Cards stay face up
       cardMatcher(props.clickedCards[0].id, props.clickedCards[1].id)
@@ -68,6 +68,7 @@ const checkForMatch = () => {
       cardResetter(props.clickedCards[0].id, props.clickedCards[1].id)
       props.clickedCards.length = 0
     }
+  }
 }
 
 const cardResetter = (cardId1: number, cardId2: number) => {
