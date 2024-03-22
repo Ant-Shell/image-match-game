@@ -21,7 +21,11 @@ const lockSetter = (value: boolean) => {
   }
 
   props.shuffledPhotos.forEach((photo:Photo) => {
-    photo.isLocked = value
+    if (photo.isMatched) {
+      photo.isLocked = true
+    } else {
+      photo.isLocked = value
+    }
   })
 }
 
