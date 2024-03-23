@@ -34,7 +34,7 @@ interface Photo {
   isLocked?: boolean,
 }
 
-const clickedCards = ref([])
+const clickedCards = ref<Array<Photo>>([])
 
 const imageList = (urlList: Array<Photo>): Array<Photo> => {
   return urlList?.reduce((acc:Array<Photo>, curr:Photo): Array<Photo> => {
@@ -57,15 +57,89 @@ const imageShuffler = (imageList: Array<Photo>): Array<Photo> => {
   return imageList.sort(() => Math.random() - 0.5)
 }
 
-const shuffledPhotos = ref(imageShuffler(imageList(photos)))
+const shuffledPhotos = ref<Array<Photo>>(imageShuffler(imageList(photos)))
 
 const gameResetter = () => {
   shuffledPhotos.value = imageShuffler(imageList(photos))
 }
 
+const lockSetter = (value: boolean) => {
+  if (shuffledPhotos === undefined) {
+    return
+  }
+
+  shuffledPhotos.value.forEach((photo:Photo) => {
+    if (photo.isMatched) {
+      photo.isLocked = true
+    } else {
+      photo.isLocked = value
+    }
+  })
+}
+
+const addCard = (shuffledPhoto:Photo) => {
+  if (clickedCards.value === undefined || shuffledPhoto === undefined) {
+    return
+  }
+
+  if (clickedCards.value.length < 2 && !clickedCards.value.includes(shuffledPhoto)) {
+    clickedCards.value.push(shuffledPhoto)
+  }
+  checkForMatch(shuffledPhoto)
+}
+
+const checkForMatch = (shuffledPhoto:Photo) => {
+  if (clickedCards.value === undefined || shuffledPhoto === undefined) {
+    return
+  }
+
+  if (clickedCards.value.length >= 2) {
+    if (clickedCards.value[0].src.medium === clickedCards.value[1].src.medium) { // Refactor me comparing id instead of image string
+      // Cards stay face up
+      cardMatcher(clickedCards.value[0].id, clickedCards.value[1].id)
+      clickedCards.value.length = 0
+    } else {
+      // Flip cards back over - face down
+      cardResetter(clickedCards.value[0].id, clickedCards.value[1].id)
+      clickedCards.value.length = 0
+    }
+  }
+}
+
+const cardResetter = (cardId1: number, cardId2: number) => {
+  lockSetter(true)
+  if (shuffledPhotos.value === undefined) {
+    return
+  }
+
+  shuffledPhotos.value.forEach((photo) => {
+    if (photo.id === cardId1) {
+      setTimeout(() => {photo.isClicked = false}, 1600)
+    }
+    if (photo.id === cardId2) {
+      setTimeout(() => {photo.isClicked = false}, 1800)
+    }
+  })
+  setTimeout(() => {lockSetter(false)}, 1800)
+}
+
+const cardMatcher = (cardId1: number, cardId2: number) => {
+  lockSetter(true)
+  if (shuffledPhotos.value === undefined) {
+    return
+  }
+
+  shuffledPhotos.value.forEach((photo) => {
+    if (photo.id === cardId1 || photo.id === cardId2) {
+      photo.isClicked = false
+      photo.isMatched = true
+    }
+  })
+  lockSetter(false)
+}
+
 defineProps({
   shuffledPhotos: Array<Photo>,
-  clickedCards: Array<Photo>,
 })
 </script>
 
@@ -73,6 +147,6 @@ defineProps({
 <template>
   <main class="h-screen w-full flex flex-col md:flex-row md:justify-center">
       <Heading :gameResetter="gameResetter" />
-      <CardsContainer v-bind:shuffledPhotos="shuffledPhotos" v-bind:clickedCards="clickedCards" />
+      <CardsContainer v-bind:shuffledPhotos="shuffledPhotos" :addCard="addCard" />
   </main>
 </template>
