@@ -137,10 +137,6 @@ const cardMatcher = (cardId1: number, cardId2: number) => {
   })
   lockSetter(false)
 }
-
-defineProps({
-  shuffledPhotos: Array<Photo>,
-})
 </script>
 
 
