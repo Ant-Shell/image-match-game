@@ -26,7 +26,7 @@ import photos from './data/imageData'
 // }
 // getImages()
 
-interface Photo {
+interface Card {
   id: number,
   src: { medium: string },
   position?: number,
@@ -35,15 +35,15 @@ interface Photo {
   isLocked?: boolean,
 }
 
-const clickedCards = ref<Array<Photo>>([])
+const clickedCards = ref<Array<Card>>([])
 
-const imageList = (urlList: Array<Photo>): Array<Photo> => {
-  return urlList?.reduce((acc:Array<Photo>, curr:Photo): Array<Photo> => {
+const cardList = (cards: Array<Card>): Array<Card> => {
+  return cards?.reduce((acc:Array<Card>, curr:Card): Array<Card> => {
     acc.push(curr) && acc.push(curr)
     return acc
   }, [])
-  .map((image:Photo, index:number) => {
-    const { id, src } = image
+  .map((card:Card, index:number) => {
+    const { id, src } = card
     return {
       id: id,
       position: index,
@@ -55,43 +55,43 @@ const imageList = (urlList: Array<Photo>): Array<Photo> => {
   })
 }
 
-const imageShuffler = (imageList: Array<Photo>): Array<Photo> => {
-  return imageList.sort(() => Math.random() - 0.5)
+const cardShuffler = (cardList: Array<Card>): Array<Card> => {
+  return cardList.sort(() => Math.random() - 0.5)
 }
 
-const shuffledPhotos = ref<Array<Photo>>(imageShuffler(imageList(photos)))
+const shuffledCards = ref<Array<Card>>(cardShuffler(cardList(photos)))
 
 const gameResetter = () => {
-  shuffledPhotos.value = imageShuffler(imageList(photos))
+  shuffledCards.value = cardShuffler(cardList(photos))
 }
 
 const lockSetter = (value: boolean) => {
-  if (shuffledPhotos === undefined) {
+  if (shuffledCards === undefined) {
     return
   }
 
-  shuffledPhotos.value.forEach((photo:Photo) => {
-    if (photo.isMatched) {
-      photo.isLocked = true
+  shuffledCards.value.forEach((card:Card) => {
+    if (card.isMatched) {
+      card.isLocked = true
     } else {
-      photo.isLocked = value
+      card.isLocked = value
     }
   })
 }
 
-const addCard = (shuffledPhoto:Photo) => {
-  if (clickedCards.value === undefined || shuffledPhoto === undefined) {
+const addCard = (shuffledCard:Card) => {
+  if (clickedCards.value === undefined || shuffledCard === undefined) {
     return
   }
 
-  if (clickedCards.value.length < 2 && !clickedCards.value.includes(shuffledPhoto)) {
-    clickedCards.value.push(shuffledPhoto)
+  if (clickedCards.value.length < 2 && !clickedCards.value.includes(shuffledCard)) {
+    clickedCards.value.push(shuffledCard)
   }
-  checkForMatch(shuffledPhoto)
+  checkForMatch(shuffledCard)
 }
 
-const checkForMatch = (shuffledPhoto:Photo) => {
-  if (clickedCards.value === undefined || shuffledPhoto === undefined) {
+const checkForMatch = (shuffledCard:Card) => {
+  if (clickedCards.value === undefined || shuffledCard === undefined) {
     return
   }
 
@@ -110,16 +110,16 @@ const checkForMatch = (shuffledPhoto:Photo) => {
 
 const cardResetter = (cardPosition1: number, cardPosition2: number) => {
   lockSetter(true)
-  if (shuffledPhotos.value === undefined) {
+  if (shuffledCards.value === undefined) {
     return
   }
 
-  shuffledPhotos.value.forEach((photo) => {
-    if (photo.position === cardPosition1) {
-      setTimeout(() => {photo.isClicked = false}, 1600)
+  shuffledCards.value.forEach((card) => {
+    if (card.position === cardPosition1) {
+      setTimeout(() => {card.isClicked = false}, 1600)
     }
-    if (photo.position === cardPosition2) {
-      setTimeout(() => {photo.isClicked = false}, 1800)
+    if (card.position === cardPosition2) {
+      setTimeout(() => {card.isClicked = false}, 1800)
     }
   })
   setTimeout(() => {lockSetter(false)}, 1800)
@@ -127,24 +127,23 @@ const cardResetter = (cardPosition1: number, cardPosition2: number) => {
 
 const cardMatcher = (cardPosition1: number, cardPosition2: number) => {
   lockSetter(true)
-  if (shuffledPhotos.value === undefined) {
+  if (shuffledCards.value === undefined) {
     return
   }
 
-  shuffledPhotos.value.forEach((photo) => {
-    if (photo.position === cardPosition1 || photo.position === cardPosition2) {
-      photo.isClicked = false
-      photo.isMatched = true
+  shuffledCards.value.forEach((card) => {
+    if (card.position === cardPosition1 || card.position === cardPosition2) {
+      card.isClicked = false
+      card.isMatched = true
     }
   })
   lockSetter(false)
 }
 </script>
 
-
 <template>
   <main class="h-screen w-full flex flex-col md:flex-row md:justify-center">
       <Heading :gameResetter="gameResetter" />
-      <CardsContainer v-bind:shuffledPhotos="shuffledPhotos" :addCard="addCard" />
+      <CardsContainer v-bind:shuffledCards="shuffledCards" :addCard="addCard" />
   </main>
 </template>
