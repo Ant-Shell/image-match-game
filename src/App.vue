@@ -36,6 +36,8 @@ interface Card {
 }
 
 const clickedCards = ref<Array<Card>>([])
+const matchCount = ref<number>(0)
+const moveCount = ref<number>(0)
 
 const cardList = (cards: Array<Card>): Array<Card> => {
   return cards?.reduce((acc:Array<Card>, curr:Card): Array<Card> => {
@@ -63,6 +65,8 @@ const shuffledCards = ref<Array<Card>>(cardShuffler(cardList(photos)))
 
 const gameResetter = () => {
   shuffledCards.value = cardShuffler(cardList(photos))
+  matchCount.value = 0
+  moveCount.value = 0
 }
 
 const lockSetter = (value: boolean) => {
@@ -88,6 +92,7 @@ const addCard = (shuffledCard:Card) => {
     clickedCards.value.push(shuffledCard)
   }
   checkForMatch(shuffledCard)
+  moveCount.value++
 }
 
 const checkForMatch = (shuffledCard:Card) => {
@@ -97,8 +102,9 @@ const checkForMatch = (shuffledCard:Card) => {
 
   if (clickedCards.value.length >= 2) {
     if (clickedCards.value[0].id === clickedCards.value[1].id) {
-      // Cards stay face up
+      // Matched cards stay face up
       cardMatcher(clickedCards.value[0].position!, clickedCards.value[1].position!)
+      matchCount.value++
       clickedCards.value.length = 0
     } else {
       // Flip cards back over - face down
@@ -143,7 +149,7 @@ const cardMatcher = (cardPosition1: number, cardPosition2: number) => {
 
 <template>
   <main class="h-screen w-full flex flex-col md:flex-row md:justify-center">
-      <Heading :gameResetter="gameResetter" />
+      <Heading v-bind:matchCount="matchCount" v-bind:moveCount="moveCount" :gameResetter="gameResetter" />
       <CardsContainer v-bind:shuffledCards="shuffledCards" :addCard="addCard" />
   </main>
 </template>
