@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 let plugin = require("tailwindcss/plugin")
 
-let CustomStyle = plugin(function ({addUtilities}) {
+let FlipStyle = plugin(function ({addUtilities}) {
   addUtilities({
     ".rotate-y-180": {
       transform: "rotateY(180deg) scaleX(-1)"
@@ -15,9 +15,6 @@ let CustomStyle = plugin(function ({addUtilities}) {
     ".perspective-1000": {
       perspective: "1000px"
     },
-    ".backface-hidden": {
-      backfaceVisibility: "hidden",
-    },
   })
 })
 
@@ -29,5 +26,5 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [CustomStyle],
+  plugins: [FlipStyle],
 }
