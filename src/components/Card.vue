@@ -21,7 +21,7 @@ const flipCard = (event:Event) => {
 
 <template>
   <button class="h-full w-full rounded-lg perspective-1000" :disabled="props.shuffledCard?.isLocked" @click="flipCard">
-    <div class="h-full w-full relative" :class="props.shuffledCard?.isMatched ? null : props.shuffledCard?.isClicked ? 'rotate-y-180 duration-500 preserve-3d' : 'rotate-y-0 duration-500 preserve-3d'">
+    <div class="h-full w-full relative" :class="(props.shuffledCard?.isMatched || props.shuffledCard?.isClicked) ? 'rotate-y-180 duration-500 preserve-3d' : 'rotate-y-0 duration-500 preserve-3d'">
       <div v-if="props.shuffledCard?.isClicked" class="h-full w-full rounded-lg cursor-default absolute">
         <img class="h-full w-full rounded-lg"
         :src="shuffledCard?.src.medium" :alt="props.shuffledCard?.position">
