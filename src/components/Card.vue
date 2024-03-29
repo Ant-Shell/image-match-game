@@ -31,7 +31,7 @@ const flipCard = (event:Event) => {
         <img class="h-full w-full rounded-lg"
         :src="shuffledCard?.src.medium" :alt="props.shuffledCard?.position">
       </div>
-      <div v-else class="h-full w-full rounded-lg hover:mt-[-5px] hover:shadow-md
+      <div v-else class="h-full w-full rounded-lg hover:mt-[-3px] hover:shadow-md
         hover:border-sky-700 hover:shadow-cyan-500/50 cursor-pointer absolute">
         <img class="h-full w-full rounded-lg" :src="cardBlue" :alt="props.shuffledCard?.position">
       </div>
