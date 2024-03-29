@@ -23,16 +23,16 @@ const flipCard = (event:Event) => {
   <button class="h-full w-full rounded-lg perspective-1000" :disabled="props.shuffledCard?.isLocked" @click="flipCard">
     <div class="h-full w-full relative" :class="(props.shuffledCard?.isMatched || props.shuffledCard?.isClicked) ?
     'rotate-y-180 duration-500 preserve-3d' : 'rotate-y-0 duration-500 preserve-3d'">
-      <div v-if="props.shuffledCard?.isClicked" class="h-full w-full rounded-lg cursor-default absolute">
+      <div v-if="props.shuffledCard?.isClicked" class="h-full w-full absolute border-black border-2 rounded-lg cursor-default">
         <img class="h-full w-full rounded-lg"
         :src="shuffledCard?.src.medium" :alt="props.shuffledCard?.position">
         </div>
-      <div v-else-if="props.shuffledCard?.isMatched" class="h-full w-full rounded-lg cursor-default absolute">
+      <div v-else-if="props.shuffledCard?.isMatched" class="h-full w-full absolute border-black border-2 rounded-lg cursor-default">
         <img class="h-full w-full rounded-lg"
         :src="shuffledCard?.src.medium" :alt="props.shuffledCard?.position">
       </div>
-      <div v-else class="h-full w-full rounded-lg hover:mt-[-3px] hover:shadow-md
-        hover:border-sky-700 hover:shadow-cyan-500/50 cursor-pointer absolute">
+      <div v-else class="h-full w-full absolute border-black border-2 rounded-lg hover:mt-[-3px] hover:shadow-md
+         hover:shadow-cyan-500/50 cursor-pointer">
         <img class="h-full w-full rounded-lg" :src="cardBlue" :alt="props.shuffledCard?.position">
       </div>
     </div>
