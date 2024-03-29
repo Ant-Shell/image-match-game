@@ -90,7 +90,6 @@ const addCard = (shuffledCard:Card) => {
 
   if (clickedCards.value.length < 2 && !clickedCards.value.includes(shuffledCard)) {
     clickedCards.value.push(shuffledCard)
-    moveCount.value++
   }
   checkForMatch(shuffledCard)
 }
@@ -101,6 +100,7 @@ const checkForMatch = (shuffledCard:Card) => {
   }
 
   if (clickedCards.value.length >= 2) {
+    moveCount.value++
     if (clickedCards.value[0].id === clickedCards.value[1].id) {
       // Matched cards stay face up
       cardMatcher(clickedCards.value[0].position!, clickedCards.value[1].position!)
