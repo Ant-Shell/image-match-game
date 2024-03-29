@@ -90,9 +90,9 @@ const addCard = (shuffledCard:Card) => {
 
   if (clickedCards.value.length < 2 && !clickedCards.value.includes(shuffledCard)) {
     clickedCards.value.push(shuffledCard)
+    moveCount.value++
   }
   checkForMatch(shuffledCard)
-  moveCount.value++
 }
 
 const checkForMatch = (shuffledCard:Card) => {
