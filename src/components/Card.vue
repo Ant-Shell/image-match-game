@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import cardBlue from '../assets/Card_Background_Blue.png'
+import cardBlue from '../assets/sonny-mauricio-kIr8e-01eAw-unsplash.jpg'
 
 
 const props = defineProps({
