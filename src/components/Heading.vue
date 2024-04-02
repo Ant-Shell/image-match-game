@@ -8,7 +8,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <header class="flex justify-evenly items-center h-[10%] md:h-[20%] w-screen md:w-[20%] md:flex-col lg:w-[15%]">
+  <header class="flex justify-evenly items-center h-[10%] md:h-[20%] w-screen md:w-[20%] md:flex-col lg:w-[15%] bg-[#7f7972]/75">
     <div class="text-white md:text-xl lg:text-2xl">
       <h2>Matches: {{ props.matchCount }} / 8</h2>
       <h2>Total Moves: {{ props.moveCount }}</h2>
