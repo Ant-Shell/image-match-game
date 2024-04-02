@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import cardBlue from '../assets/sonny-mauricio-kIr8e-01eAw-unsplash.jpg'
+import cardBack from '../assets/alexander-tsang-_frvdyMH6S0-unsplash.jpg'
 
 
 const props = defineProps({
@@ -33,7 +33,7 @@ const flipCard = (event:Event) => {
       </div>
       <div v-else class="h-full w-full absolute border-black border-2 rounded-lg hover:mt-[-3px] hover:shadow-md
         hover:shadow-cyan-500/50 cursor-pointer">
-        <img class="h-full w-full rounded-lg" :src="cardBlue" :alt="props.shuffledCard?.position">
+        <img class="h-full w-full rounded-lg" :src="cardBack" :alt="props.shuffledCard?.position">
       </div>
     </div>
   </button>
