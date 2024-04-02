@@ -148,7 +148,8 @@ const cardMatcher = (cardPosition1: number, cardPosition2: number) => {
 </script>
 
 <template>
-  <main class="h-screen w-full flex flex-col md:flex-row md:justify-center">
+  <main class="h-screen w-full flex flex-col md:flex-row md:justify-center bg-cover bg-top"
+    style="background-image: url(./src/assets/sebastian-unrau-sp-p7uuT0tw-unsplash.jpg)">
       <Heading v-bind:matchCount="matchCount" v-bind:moveCount="moveCount" :gameResetter="gameResetter" />
       <CardsContainer v-bind:shuffledCards="shuffledCards" :addCard="addCard" />
   </main>
