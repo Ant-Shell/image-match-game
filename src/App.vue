@@ -92,7 +92,6 @@ const addCard = (shuffledCard:Card) => {
     clickedCards.value.push(shuffledCard)
   }
   checkForMatch(shuffledCard)
-  moveCount.value++
 }
 
 const checkForMatch = (shuffledCard:Card) => {
@@ -101,6 +100,7 @@ const checkForMatch = (shuffledCard:Card) => {
   }
 
   if (clickedCards.value.length >= 2) {
+    moveCount.value++
     if (clickedCards.value[0].id === clickedCards.value[1].id) {
       // Matched cards stay face up
       cardMatcher(clickedCards.value[0].position!, clickedCards.value[1].position!)
@@ -148,7 +148,8 @@ const cardMatcher = (cardPosition1: number, cardPosition2: number) => {
 </script>
 
 <template>
-  <main class="h-screen w-full flex flex-col md:flex-row md:justify-center">
+  <main class="h-screen w-full flex flex-col md:flex-row md:justify-center bg-cover bg-top"
+    style="background-image: url(./src/assets/sebastian-unrau-sp-p7uuT0tw-unsplash.jpg)">
       <Heading v-bind:matchCount="matchCount" v-bind:moveCount="moveCount" :gameResetter="gameResetter" />
       <CardsContainer v-bind:shuffledCards="shuffledCards" :addCard="addCard" />
   </main>
