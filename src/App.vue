@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Winner from './components/Winner.vue'
 import Heading from './components/Heading.vue'
 import CardsContainer from './components/CardsContainer.vue'
 import { ref } from 'vue'
@@ -148,8 +149,9 @@ const cardMatcher = (cardPosition1: number, cardPosition2: number) => {
 </script>
 
 <template>
-  <main class="h-screen w-full flex flex-col md:flex-row md:justify-center bg-cover bg-top"
+  <main class="h-screen w-full flex flex-col md:flex-row md:justify-center bg-cover bg-top relative"
     style="background-image: url(./src/assets/sebastian-unrau-sp-p7uuT0tw-unsplash.jpg)">
+      <Winner />
       <Heading v-bind:matchCount="matchCount" v-bind:moveCount="moveCount" :gameResetter="gameResetter" />
       <CardsContainer v-bind:shuffledCards="shuffledCards" :addCard="addCard" />
   </main>
