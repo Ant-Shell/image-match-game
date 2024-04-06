@@ -2,11 +2,11 @@
 
 const props = defineProps({
   gameWon: Boolean,
-  gameResetter: Function,
+  startNewGame: Function,
 })
 
 const restartGame = () => {
-  props.gameResetter?.()
+  props.startNewGame?.()
 }
 
 </script>
