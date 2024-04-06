@@ -25,6 +25,10 @@ const errorMessage = ref<string>("")
 const shuffledCards = ref<Array<Card>>([])
 
 onMounted(() =>
+  imageFetcher()
+)
+
+const imageFetcher = () => {
   getImages()
   .then((data) => {
     images.value = data.photos
@@ -34,7 +38,7 @@ onMounted(() =>
     errorMessage.value = `${error}. Using default cards.`
     shuffledCards.value = cardShuffler(cardList(photos))
   })
-)
+}
 
 const cardList = (cards: Array<Card>): Array<Card> => {
   return cards?.reduce((acc:Array<Card>, curr:Card): Array<Card> => {
@@ -68,6 +72,13 @@ const gameResetter = () => {
   moveCount.value = 0
   gameWon.value = false
 }
+
+const startNewGame = () => {
+  imageFetcher()
+  matchCount.value = 0
+  moveCount.value = 0
+  gameWon.value = false
+ }
 
 const determineWinner = () => {
   if (matchCount.value === (shuffledCards.value.length / 2)) {
@@ -157,7 +168,7 @@ const cardMatcher = (cardPosition1: number, cardPosition2: number) => {
 <template>
   <main class="h-screen w-full flex flex-col md:flex-row md:justify-center bg-cover bg-top relative"
     style="background-image: url(./src/assets/sebastian-unrau-sp-p7uuT0tw-unsplash.jpg)">
-      <WinnerModal v-bind:gameWon="gameWon" :gameResetter="gameResetter"/>
+      <WinnerModal v-bind:gameWon="gameWon" :startNewGame="startNewGame"/>
       <Heading v-bind:matchCount="matchCount" v-bind:moveCount="moveCount" :gameResetter="gameResetter" />
       <CardsContainer v-bind:shuffledCards="shuffledCards" :addCard="addCard" />
   </main>
