@@ -10,7 +10,6 @@ const getImages = async (): Promise<Photos> => {
       return response as Photos;
     } else {
       const errorMessage = response
-      console.error('Error fetching photos:', errorMessage.error);
       throw new Error(errorMessage.error);
     }
   } catch (error) {
