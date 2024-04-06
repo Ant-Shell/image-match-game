@@ -5,6 +5,11 @@ const props = defineProps({
   moveCount: Number,
   gameResetter: Function,
 })
+
+const resetGame = () => {
+  props.gameResetter?.()
+}
+
 </script>
 
 <template>
@@ -14,7 +19,7 @@ const props = defineProps({
       <h2>Total Moves: {{ props.moveCount }}</h2>
     </div>
     <button class="w-28 md:w-36 h-10 md:h-12 border-2 bg-[#374F2F] border-[#304529] text-white md:text-xl lg:text-2xl
-    hover:bg-[#4A6741] rounded-md" @click="props.gameResetter">
+    hover:bg-[#4A6741] rounded-md" @click="resetGame">
       Reset Game
     </button>
   </header>
