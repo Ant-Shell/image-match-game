@@ -16,16 +16,16 @@ interface Card {
   isLocked?: boolean,
 }
 
+const images = ref<Array<Photo>>([])
+const shuffledCards = ref<Array<Card>>([])
 const clickedCards = ref<Array<Card>>([])
 const matchCount = ref<number>(0)
 const moveCount = ref<number>(0)
 const gameWon = ref<boolean>(false)
-const images = ref<Array<Photo>>([])
 const errorMessage = ref<string>("")
-const shuffledCards = ref<Array<Card>>([])
 
 onMounted(() =>
-  imageFetcher()
+  startNewGame()
 )
 
 const imageFetcher = () => {
