@@ -59,7 +59,11 @@ const cardShuffler = (cardList: Array<Card>): Array<Card> => {
 }
 
 const gameResetter = () => {
-  shuffledCards.value = cardShuffler(cardList(images.value))
+  if (images.value.length) {
+    shuffledCards.value = cardShuffler(cardList(images.value))
+  } else {
+    shuffledCards.value = cardShuffler(cardList(photos))
+  }
   matchCount.value = 0
   moveCount.value = 0
   gameWon.value = false
