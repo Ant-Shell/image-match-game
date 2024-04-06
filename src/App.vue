@@ -1,31 +1,11 @@
 <script setup lang="ts">
+import { ref, onMounted } from 'vue'
+import { Photo } from 'pexels';
+import { getImages } from './utils/apiCalls'
 import WinnerModal from './components/WinnerModal.vue'
 import Heading from './components/Heading.vue'
 import CardsContainer from './components/CardsContainer.vue'
-import { ref } from 'vue'
 import photos from './data/imageData'
-// import { createClient, ErrorResponse, Photos, Photo } from 'pexels';
-
-// const API_KEY = import.meta.env.VITE_APP_API_KEY
-// const client = createClient(API_KEY)
-
-// May need to adjust downstream, or isolate the string somehow:
-// const images = ref<Array<Photo> | string>() 
-
-// Get images using The Pexels Javascript library
-// const getImages = async () => {
-//   await client.photos.curated({ per_page: 8 }).then(photos => {
-//     if ((<Photos>photos).photos) {
-//       const imageList = (<Photos>photos)
-//       images.value = imageList.photos
-//     } else {
-//       const error = (<ErrorResponse>photos)
-//       console.log(error.error)
-//       images.value = error.error
-//     }
-//   })
-// }
-// getImages()
 
 interface Card {
   id: number,
@@ -40,6 +20,21 @@ const clickedCards = ref<Array<Card>>([])
 const matchCount = ref<number>(0)
 const moveCount = ref<number>(0)
 const gameWon = ref<boolean>(false)
+const images = ref<Array<Photo>>([])
+const errorMessage = ref<string>("")
+const shuffledCards = ref<Array<Card>>([])
+
+onMounted(() =>
+  getImages()
+  .then((data) => {
+    images.value = data.photos
+    shuffledCards.value = cardShuffler(cardList(images.value))
+  })
+  .catch((error) => {
+    errorMessage.value = `${error}. Using default cards.`
+    shuffledCards.value = cardShuffler(cardList(photos))
+  })
+)
 
 const cardList = (cards: Array<Card>): Array<Card> => {
   return cards?.reduce((acc:Array<Card>, curr:Card): Array<Card> => {
@@ -63,10 +58,8 @@ const cardShuffler = (cardList: Array<Card>): Array<Card> => {
   return cardList.sort(() => Math.random() - 0.5)
 }
 
-const shuffledCards = ref<Array<Card>>(cardShuffler(cardList(photos)))
-
 const gameResetter = () => {
-  shuffledCards.value = cardShuffler(cardList(photos))
+  shuffledCards.value = cardShuffler(cardList(images.value))
   matchCount.value = 0
   moveCount.value = 0
   gameWon.value = false
