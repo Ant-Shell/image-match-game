@@ -5,6 +5,7 @@ import { getImages } from './utils/apiCalls'
 import WinnerModal from './components/WinnerModal.vue'
 import Heading from './components/Heading.vue'
 import CardsContainer from './components/CardsContainer.vue'
+import Error from './components/Error.vue'
 import photos from './data/imageData'
 
 interface Card {
@@ -35,7 +36,7 @@ const imageFetcher = () => {
     shuffledCards.value = cardShuffler(cardList(images.value))
   })
   .catch((error) => {
-    errorMessage.value = `${error}. Using default cards.`
+    errorMessage.value = `Connectivity error: ${error.message}.\nThis game will use default cards.`
     shuffledCards.value = cardShuffler(cardList(photos))
   })
 }
@@ -171,5 +172,6 @@ const cardMatcher = (cardPosition1: number, cardPosition2: number) => {
       <WinnerModal v-bind:gameWon="gameWon" :startNewGame="startNewGame"/>
       <Heading v-bind:matchCount="matchCount" v-bind:moveCount="moveCount" :gameResetter="gameResetter" />
       <CardsContainer v-bind:shuffledCards="shuffledCards" :addCard="addCard" />
+      <Error v-bind:errorMessage="errorMessage"/>
   </main>
 </template>
