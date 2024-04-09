@@ -5,6 +5,7 @@ import { getImages } from './utils/apiCalls'
 import WinnerModal from './components/WinnerModal.vue'
 import Heading from './components/Heading.vue'
 import CardsContainer from './components/CardsContainer.vue'
+import Error from './components/Error.vue'
 import photos from './data/imageData'
 
 interface Card {
@@ -23,6 +24,7 @@ const matchCount = ref<number>(0)
 const moveCount = ref<number>(0)
 const gameWon = ref<boolean>(false)
 const errorMessage = ref<string>("")
+const showError = ref<boolean>(false)
 
 onMounted(() =>
   startNewGame()
@@ -35,9 +37,15 @@ const imageFetcher = () => {
     shuffledCards.value = cardShuffler(cardList(images.value))
   })
   .catch((error) => {
-    errorMessage.value = `${error}. Using default cards.`
+    errorMessage.value = `Connectivity error: ${error.message}.\nThis game will use default cards.`
     shuffledCards.value = cardShuffler(cardList(photos))
+    errorMessageHandler()
   })
+}
+
+const errorMessageHandler = () => {
+  showError.value = true
+  setTimeout(() => {showError.value = false}, 10000)
 }
 
 const cardList = (cards: Array<Card>): Array<Card> => {
@@ -171,5 +179,6 @@ const cardMatcher = (cardPosition1: number, cardPosition2: number) => {
       <WinnerModal v-bind:gameWon="gameWon" :startNewGame="startNewGame"/>
       <Heading v-bind:matchCount="matchCount" v-bind:moveCount="moveCount" :gameResetter="gameResetter" />
       <CardsContainer v-bind:shuffledCards="shuffledCards" :addCard="addCard" />
+      <Error v-bind:showError="showError" v-bind:errorMessage="errorMessage"/>
   </main>
 </template>

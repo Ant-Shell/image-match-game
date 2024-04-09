@@ -24,7 +24,20 @@ module.exports = {
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+       "slide-out": "slideOut 10s"
+      },
+      keyframes: {
+        slideOut: {
+          "0%": { transform: "translateY(5rem)" },
+          "25%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(0px)" },
+          "75%": { transform: "translateY(0px)" },
+          "100%": { transform: "translateY(5rem)" },
+        }
+      }
+    },
   },
   plugins: [FlipStyle],
 }
