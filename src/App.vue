@@ -25,7 +25,7 @@ const moveCount = ref<number>(0)
 const gameWon = ref<boolean>(false)
 const errorMessage = ref<string>("")
 const showError = ref<boolean>(false)
-const isLoading = ref<boolean>(true)
+const isLoading = ref<boolean>(false)
 
 onMounted(() =>
   startNewGame()
