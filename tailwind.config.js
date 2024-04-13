@@ -26,7 +26,7 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-       "slide-out": "slideOut 10s"
+       "slide-out": "slideOut 5s"
       },
       keyframes: {
         slideOut: {
