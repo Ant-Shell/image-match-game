@@ -25,12 +25,14 @@ const moveCount = ref<number>(0)
 const gameWon = ref<boolean>(false)
 const errorMessage = ref<string>("")
 const showError = ref<boolean>(false)
+const isLoading = ref<boolean>(false)
 
 onMounted(() =>
   startNewGame()
 )
 
 const imageFetcher = () => {
+  isLoading.value = true
   getImages()
   .then((data) => {
     images.value = data.photos
@@ -41,11 +43,12 @@ const imageFetcher = () => {
     shuffledCards.value = cardShuffler(cardList(photos))
     errorMessageHandler()
   })
+  isLoading.value = false
 }
 
 const errorMessageHandler = () => {
   showError.value = true
-  setTimeout(() => {showError.value = false}, 10000)
+  setTimeout(() => {showError.value = false}, 5000)
 }
 
 const cardList = (cards: Array<Card>): Array<Card> => {
@@ -174,11 +177,10 @@ const cardMatcher = (cardPosition1: number, cardPosition2: number) => {
 </script>
 
 <template>
-  <main class="h-screen w-full flex flex-col md:flex-row md:justify-center bg-cover bg-top relative"
-    style="background-image: url(./src/assets/sebastian-unrau-sp-p7uuT0tw-unsplash.jpg)">
+  <main class="h-screen w-full flex flex-col md:flex-row md:justify-center relative">
       <WinnerModal v-bind:gameWon="gameWon" :startNewGame="startNewGame"/>
       <Heading v-bind:matchCount="matchCount" v-bind:moveCount="moveCount" :gameResetter="gameResetter" />
-      <CardsContainer v-bind:shuffledCards="shuffledCards" :addCard="addCard" />
+      <CardsContainer v-bind:shuffledCards="shuffledCards" v-bind:isLoading="isLoading" :addCard="addCard" />
       <Error v-bind:showError="showError" v-bind:errorMessage="errorMessage"/>
   </main>
 </template>
